@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Job_ManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Job_ManagementEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Departments" EntityType="Job_ManagementModel.Department" />
+    <EntitySet Name="JobPositions" EntityType="Job_ManagementModel.JobPosition" />
+    <EntitySet Name="Locations" EntityType="Job_ManagementModel.Location" />
+    <AssociationSet Name="FK__JobPositi__Depar__2B3F6F97" Association="Job_ManagementModel.FK__JobPositi__Depar__2B3F6F97">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="JobPosition" EntitySet="JobPositions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JobPositi__Locat__29572725" Association="Job_ManagementModel.FK__JobPositi__Locat__29572725">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="JobPosition" EntitySet="JobPositions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="JobPositions" Relationship="Job_ManagementModel.FK__JobPositi__Depar__2B3F6F97" FromRole="Department" ToRole="JobPosition" />
+  </EntityType>
+  <EntityType Name="JobPosition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <Property Name="PostedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ClosingDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Department" Relationship="Job_ManagementModel.FK__JobPositi__Depar__2B3F6F97" FromRole="JobPosition" ToRole="Department" />
+    <NavigationProperty Name="Location" Relationship="Job_ManagementModel.FK__JobPositi__Locat__29572725" FromRole="JobPosition" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Zipcode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="JobPositions" Relationship="Job_ManagementModel.FK__JobPositi__Locat__29572725" FromRole="Location" ToRole="JobPosition" />
+  </EntityType>
+  <Association Name="FK__JobPositi__Depar__2B3F6F97">
+    <End Type="Job_ManagementModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="Job_ManagementModel.JobPosition" Role="JobPosition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="JobPosition">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobPositi__Locat__29572725">
+    <End Type="Job_ManagementModel.Location" Role="Location" Multiplicity="1" />
+    <End Type="Job_ManagementModel.JobPosition" Role="JobPosition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="JobPosition">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
