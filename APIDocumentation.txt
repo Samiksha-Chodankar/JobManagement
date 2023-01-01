@@ -1,0 +1,62 @@
+//Please put appropriate localhost port
+//Please use the below URLs to get the JSON result. 
+
+CREATE Api:
+URL:https://localhost:44314/api/Job 
+Request:
+{
+  "title": "Software Developer",
+  "description": "Job description here...",
+  "locationId": 1,
+  "departmentId": 1,
+  "closingDate": "2021-08-30T18:43:31.877Z"
+}
+
+UPDATE Api:
+URL:https://localhost:44314/api/Job/5
+Request:
+{
+  "title": "Software Developer",
+  "description": "Job description here...",
+  "locationId": 1,
+  "departmentId": 1,
+  "closingDate": "2021-08-30T18:43:31.877Z"
+}
+
+Details Api:
+URL:https://localhost:44314/api/Job/5
+
+
+Department:
+Get:  https://localhost:44314/api/Department
+Post:https://localhost:44314/api/Department
+Requsest:
+{
+  "Title": "Research & Development"
+}
+PUT:https://localhost:44314/api/Department/3
+Request:
+{
+  "Title": "Research and Development"
+}
+
+Location:
+Get:https://localhost:44314/api/Location
+Post:https://localhost:44314/api/Location
+Request:
+{
+    "title": "London Head Office",
+    "city": "Baltimore",
+    "state": "MD",
+    "country": "United States",
+    "ZipCode": 21202
+  }
+PUT:https://localhost:44314/api/Location/3
+Request:
+{
+    "title": "Goa Head Office",
+    "city": "Verna",
+    "state": "Goa",
+    "country": "India",
+    "ZipCode": 403002
+  }
