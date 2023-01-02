@@ -19,7 +19,9 @@ namespace JobManagement.Controllers
 
             List<LocationData> location = db.Locations.Select(t=> new LocationData { 
               Id=t.Id,
+              Title=t.Title,
               City=t.City,
+              State=t.State,
               Country=t.Country,
               Zip=t.Zipcode
             
@@ -38,8 +40,18 @@ namespace JobManagement.Controllers
         [System.Web.Http.HttpGet]
         public IHttpActionResult Index(int id)
         {
+            List<LocationData> location = db.Locations.Where(t => t.Id == id).Select(t => new LocationData
+            {
+                Id = t.Id,
+                Title = t.Title,
+                City = t.City,
+                State = t.State,
+                Country = t.Country,
+                Zip = t.Zipcode
 
-            List<Location> location = db.Locations.Where(t => t.Id == id).ToList();
+
+            }).ToList();
+           // List<Location> location = db.Locations.Where(t => t.Id == id).ToList();
 
 
             if (location.Count == 0)
@@ -67,6 +79,7 @@ namespace JobManagement.Controllers
             entity.Country = e.Country;
             entity.Zipcode = e.Zipcode;
             entity.City = e.City;
+            entity.State = e.State;
             db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
 

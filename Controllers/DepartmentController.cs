@@ -36,8 +36,14 @@ namespace JobManagement.Controllers
         [System.Web.Http.HttpGet]
         public IHttpActionResult Index(int id)
         {
+            List<DepartmentData> department = db.Departments.Where(t => t.Id == id).Select(t => new DepartmentData
+            {
+                Id = t.Id,
+                Title = t.Title
 
-            List<Department> department = db.Departments.Where(t=>t.Id==id).ToList();
+
+            }).ToList();
+          
 
 
             if (department.Count == 0)
